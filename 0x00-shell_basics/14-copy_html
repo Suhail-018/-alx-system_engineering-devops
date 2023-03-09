@@ -1,2 +1,2 @@
 #!/bin/bash
-cp -u*14-copy_html alx-system_engineering-devops
+cp -u*html
