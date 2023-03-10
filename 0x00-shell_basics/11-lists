@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -al /. /.. /boot | head
+ls -al ./ | head
