@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -al -Iboot -Itmp
+ls -la . .. /boot
