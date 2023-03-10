@@ -1,2 +1,2 @@
 #!/bin/bash
-ls -al ./ ../ /boot | grep -v '^d' 
+ls -al -Iboot -Itmp
