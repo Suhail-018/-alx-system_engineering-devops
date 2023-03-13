@@ -1,0 +1,2 @@
+#!/bin/bash
+paste -d, /etc/passwd /etc/hosts | column  -s',' -n -t
