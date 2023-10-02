@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# display a list of all running process with user-oriented format
+ps aux --forest
