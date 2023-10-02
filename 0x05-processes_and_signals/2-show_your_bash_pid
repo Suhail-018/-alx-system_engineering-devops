@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
-# show_your_bash_pid
+# Display information about the script's Bash process
 # shellcheck disable=SC2009
 
-# Display information about the script's Bash process
 ps -C bash -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command
