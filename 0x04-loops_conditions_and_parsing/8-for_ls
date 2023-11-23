@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 # This script is displaying all the content of adirectory in alist formt 
-lst="$(ls .)"
-for i in "$lst"; do
+for i in *; do
     cut -d'-' -f2 <<< "$i"
     echo "f2"
 done
