@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script displays "Best School" 10 times, and on the 9th iteration, it says "Hi" on a new line
+# This scriptdisplay"BestSchool"10x&on9thiteration,itsays"Hi"o newline
 i=0
 while ((i <= 9)); do
     if [ "$i" -eq 8 ]; then
