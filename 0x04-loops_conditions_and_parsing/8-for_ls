@@ -2,5 +2,5 @@
 # This script is displaying all the content of adirectory in alist formt 
 for i in *; do
     cut -d'-' -f2 <<< "$i"
-    echo "f2"
+    echo "$f2"
 done
