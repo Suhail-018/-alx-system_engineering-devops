@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # This script displays all the content of a directory in a list format
 for file in *; do
-    if [ -f "$file" ] && [[ "$file" == *-* ]]; then
-        echo "$(cut -d'-' -f2 <<< "$file")"
+    if [[ ! $file =~ ^\..* ]]; then
+        filename="${file#*-}";
+        echo "$filename"
     fi
 done
