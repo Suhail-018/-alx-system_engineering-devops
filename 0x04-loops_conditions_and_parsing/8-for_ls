@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# This script is displaying all the content of adirectory in alist formt 
-for i in *; do
-    echo "$(cut -d'-' -f2 <<< "$i")"
+# This script displays all the content of a directory in a list format
+for file in *; do
+    echo "$(cut -d'-' -f2 "$file")"
 done
