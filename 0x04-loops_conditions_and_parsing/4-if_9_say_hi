@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # This scriptdisplay"BestSchool"10x&on9thiteration,itsays"Hi"o newline
 i=0
-while ((i <= 9)); do
-    if [ "$i" -eq 8 ]; then
+while ((i <= 10)); do
+    if [ "$i" -eq 9 ]; then
         echo "Hi"
     else
         echo "Best School"
