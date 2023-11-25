@@ -6,6 +6,5 @@ if [ -z "$pid" ]; then
     echo "Process 4-to_infinity_and_beyond not found."
 else
     # Send a termination signal to the process
-    echo "Terminating process $pid"
     pkill -f "4-to_infinity_and_beyond"
 fi
