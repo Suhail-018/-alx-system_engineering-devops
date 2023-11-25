@@ -7,5 +7,4 @@ if [ -z "$pid" ]; then
 else
     # Send a termination signal to the process
     kill "$pid"
-    echo "Termination signal sent to process $pid"
 fi

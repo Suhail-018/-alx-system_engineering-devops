@@ -6,6 +6,5 @@ if [ -z "$pid" ]; then
     echo "Process 7-highlander not found."
 else
     # Send a termination signal to the process
-    echo "Killing process $pid"
     kill -s SIGKILL "$pid"
 fi
