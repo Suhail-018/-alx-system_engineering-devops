@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # solve the container error using the command b
 # Run apache on container
+#!/usr/bin/env bash
+# solve the container error
 
-echo "ServerName localhost" >> /etc/apache2.conf
 service apache2 start
