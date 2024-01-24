@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# solve the container error using the command below
+
+service apache2 start
