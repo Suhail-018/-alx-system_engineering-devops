@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
 # solve the container error using the command below
 
+docker exec -it 47ca3994a491 /bin/bash
 service apache2 start
+# ... other commands ...
+exit
+
