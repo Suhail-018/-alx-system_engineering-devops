@@ -1,8 +1,6 @@
 #!/usr/bin/env bash
-# solve the container error using the command below
+# solve the container error using the command b
+# Run apache on container
 
-docker exec -it 47ca3994a491 /bin/bash
+echo "ServerName localhost" >> /etc/apache2.conf
 service apache2 start
-# ... other commands ...
-exit
-
