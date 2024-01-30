@@ -7,24 +7,4 @@ sudo apt-get -y install nginx
 sudo ufw allow 'Nginx HTTP'
 echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    server_name _;
-
-    location / {
-        # Add custom HTTP header with the server's hostname
-        add_header X-Served-By \$hostname;
-
-        # Your other configurations can go here
-
-        # For example, proxy_pass to a backend server
-        # proxy_pass http://backend_server;
-    }
-}
-EOF
-# Create a symbolic link to enable the site
-sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/
 sudo service nginx restart
