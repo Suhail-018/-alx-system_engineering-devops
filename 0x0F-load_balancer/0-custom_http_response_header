@@ -1,34 +1,39 @@
 #!/usr/bin/env bash
-# Configure Nginx so that its HTTP response contains a custom header (on web-01 and web-02)
+# Installs, configures, and starts the server
 
-SITE_FILE=/etc/nginx/sites-available/default
-CONF_FILE=/etc/nginx/nginx.conf
+sudo apt-get -y update;
+sudo apt-get -y install nginx;
+sudo ufw allow 'Nginx HTTP';
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.nginx-debian.html';
+THESERVER_CONF=\
+"server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+        server_name _;
+        location / {
+                try_files \$uri \$uri/ =404;
+        }
+        
+        location /redirect_me {
+            return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+        }
+        error_page 404 /404.html;
+        location = /404.html{
+        internal;
+        } 
+        
+        add_header X-Served-By \$hostname;
+        # Your usual location configuration...
+       
 
-ERROR_PAGE='\n\n\terror_page 404 /404.html;\n\tlocation = /404.html {\n\t\tinternal;\n\t}\n'
-REDIRECT='\n\n\tlocation /redirect_me {\n\t\treturn 301 https://google.com;\n\t}\n'
-ADD_HEADER='\n\n\tadd_header X-Served-By \$hostname;\n'
+}"
 
-CHECK_ERR_PAGE=$(cat "$SITE_FILE" | grep 'error_page 404')
-CHECK_REDIR=$(cat "$SITE_FILE" | grep 'location /redirect_me')
-CHECK_X_SERVER_BY=$(cat "$CONF_FILE" | grep 'add_header X-Served-By')
+bash -c "echo -e '$THESERVER_CONF' > /etc/nginx/sites-enabled/default"
 
-sudo apt-get -y update
-sudo apt-get -y upgrade
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-
-if [ -z "$CHECK_REDIR" ]; then
-        sudo sed -i "s@^\tserver_name _;@&$REDIRECT@" $SITE_FILE
+if [ "$(pgrep -c nginx)" -le 0 ]; then
+        service nginx start
+else
+        service nginx restart
 fi
-
-if [ -z "$CHECK_ERR_PAGE" ]; then
-        sudo sed -i "s@^\tserver_name _;@&$ERROR_PAGE@" $SITE_FILE
-fi
-
-if [ -z "$CHECK_X_SERVER_BY" ]; then
-        sudo sed -i "s@^http {@&$ADD_HEADER@" $CONF_FILE
-fi
-
-sudo service nginx restart
