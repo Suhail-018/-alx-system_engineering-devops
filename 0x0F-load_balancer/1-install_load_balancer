@@ -1,21 +1,30 @@
 #!/usr/bin/env bash
-# configure haproxy load palancer
+# configure haproxy load balancer
+
 sudo apt-get update
 sudo apt-get -y upgrade
 sudo apt-get -y install haproxy
-server_conf= \
-"
+
+# Assigning the multi-line string using the <<EOF syntax
+server_conf=$(cat <<EOF
 frontend haproxy_balancer
     bind *:80
     mode http
-    default_backend webservers
+    default_backend alxwebservers
 
-backend webservers
+backend alxwebservers
     balance roundrobin
-    server 336956-web-01 54.89.27.151:80 check
-    server 336956-web-02 18.209.225.187:80 check
-"
+    mode http
+    server 03-web-01 54.90.31.60:80 check
+    server 03-web-02 100.25.151.235:80 check
+EOF
+)
+
+# Append the configuration to haproxy.cfg
 echo "$server_conf" | sudo tee -a /etc/haproxy/haproxy.cfg
+
+# Enable HAProxy
 echo "ENABLED=1" | sudo tee /etc/default/haproxy
-sudo haproxy -c -f /etc/haproxy/haproxy.cfg
-sudo service haproxy restart
+
+# Check configuration syntax and restart HAProxy
+sudo haproxy -c -f /etc/haproxy/haproxy.cfg && sudo service haproxy restart
