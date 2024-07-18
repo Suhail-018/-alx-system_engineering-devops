@@ -3,5 +3,7 @@
 # Run apache on container
 #!/usr/bin/env bash
 # solve the container error
-
-service apache2 start
+sudo vim /etc/apache2/sites-available/httpd.conf
+sudo a2ensite httpd.conf
+sudo httpd.conf configtest
+sudo service apache2 start
