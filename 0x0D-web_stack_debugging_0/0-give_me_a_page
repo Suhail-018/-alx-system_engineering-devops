@@ -3,7 +3,26 @@
 # Run apache on container
 #!/usr/bin/env bash
 # solve the container error
+docker exec -it eager_fermat /bin/bash
 sudo vim /etc/apache2/sites-available/httpd.conf
+echo '<VirtualHost *:80>
+    ServerAdmin admin@mywebsite.com
+    ServerName mywebsite.com
+    ServerAlias www.mywebsite.com
+
+    DocumentRoot /var/www/html
+
+    <Directory /var/www/html>
+        Options Indexes FollowSymLinks
+        AllowOverride All
+        Require all granted
+    </Directory>
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>' | sudo tee /etc/apache2/sites-available/httpd.conf
+
+
 sudo a2ensite httpd.conf
 sudo httpd.conf configtest
 sudo service apache2 start
